@@ -41,6 +41,11 @@ const createTask = async (req, res) => {
   const { title, description, status, assignedTo, dueDate } = req.body;
 
   try {
+
+    if(!title || !description){
+      return res.status(404).json({ message : "Empty payload received" });
+    }
+
     const task = await Task.create({
       title,
       description,
