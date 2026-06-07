@@ -10,11 +10,15 @@ const Logo = () => (
 const inputCls = 'w-full bg-bg-input border border-border rounded-[10px] px-4 py-3 text-[15px] text-text-primary outline-none placeholder:text-[#4e4a6e] focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200 font-sans hover:border-border-light';
 const labelCls = 'text-[11px] font-semibold uppercase tracking-[0.6px] text-text-muted group-focus-within:text-primary transition-colors duration-200';
 
+const viewPasswordIcon = "https://img.icons8.com/material/24/FFFFFF/visible--v1.png";
+const hidePasswordIcon = "https://img.icons8.com/material-outlined/24/FFFFFF/hide.png";
+
 const RegisterPage = () => {
   const [name, setName]       = useState('');
   const [email, setEmail]     = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole]       = useState('Talent');
+  const [viewPassword, setViewPassword] = useState(true);
   const { login }  = useAuth();
   const navigate   = useNavigate();
 
@@ -56,8 +60,14 @@ const RegisterPage = () => {
 
           <div className="flex flex-col gap-2 group">
             <label className={labelCls} htmlFor="reg-password">Password</label>
-            <input id="reg-password" type="password" placeholder="••••••••"
-              value={password} onChange={(e) => setPassword(e.target.value)} required className={inputCls} />
+            <div className={` ${inputCls} focus-within:border-primary focus-within:ring-[3px]
+    focus-within:ring-primary/20  flex items-center gap-3`}>
+              <input id="reg-password" type={viewPassword ? "text" : "password"} placeholder="••••••••"
+              value={password} onChange={(e) => setPassword(e.target.value)} className="placeholder:text-[#4e4a6e]  flex-1 bg-transparent outline-none min-w-0" required/>
+              <img width="24" onClick={() => setViewPassword(prev => !prev)} height="24" 
+              src={viewPassword ? viewPasswordIcon : hidePasswordIcon } 
+              className='size-4' alt={viewPassword ? "view" : "hide"}/>
+            </div>
           </div>
 
           <div className="flex flex-col gap-2 group">
