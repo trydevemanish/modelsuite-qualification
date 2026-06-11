@@ -75,7 +75,7 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full border-collapse" style={{ fontSize: '13.5px' }}>
+      <table className="w-full border-collapse " style={{ fontSize: '13.5px' }}>
         <thead>
           <tr>
             <th className="table-th">Title</th>
@@ -93,17 +93,13 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
               style={{ animationDelay: `${i * 0.05}s` }}>
 
               {/* Title + description */}
-              <td className="table-td" style={{ maxWidth: '260px' }}>
+              <td className="table-td max-w-[260px]">
                 <span className="block font-semibold truncate"
                   style={{ color: '#E5E2E1', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>
                   {task.title || '—'}
                 </span>
                 {task.description && (
-                  <span className="block truncate wrap-break-word" style={{
-                    color: "#4B5563",
-                    fontSize: "12px",
-                    maxWidth: "240px",
-                  }}>
+                  <span className="block truncate wrap-break-word text-[#4B5563] text-[12px] w-auto ">
                       {ConvertHtmltoText(task.description)}
                   </span>
                 )}
