@@ -18,7 +18,7 @@ const TaskCard = ({ task, showClaimButton = false, onClaimed }) => {
       alert(err.response?.data?.message || 'Failed to claim task');
     }
   };
-
+  
   return (
     <div className="bg-bg-card border border-border rounded-xl p-5 flex flex-col gap-3 hover:border-border-light hover:-translate-y-0.5 transition-all cursor-default">
 
@@ -34,7 +34,16 @@ const TaskCard = ({ task, showClaimButton = false, onClaimed }) => {
 
       
       {task.description && (
-        <p className="text-[13px] text-text-muted leading-relaxed">{task.description}</p>
+        <div
+        className='text-[13px] rounded-sm text-wrap text-text-muted leading-relaxed wrap-break-word 
+        [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6 [&_a]:text-blue-500 [&_a]:underline
+        [&_h1]:text-xl [&_h1]:font-bold [&_h2]:text-lg [&_h2]:font-semibold
+        max-h-[20rem] overflow-y-auto hide-scrollbar my-2
+        '
+          dangerouslySetInnerHTML={{
+            __html: task.description,
+          }}
+        />
       )}
 
       {/* Meta row */}

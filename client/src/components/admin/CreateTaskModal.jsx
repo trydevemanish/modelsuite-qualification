@@ -1,5 +1,7 @@
 ﻿import { useState } from 'react';
 import { createTask, fetchTalents } from '../../api/tasks';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 const STATUS_OPTIONS = ['Open', 'Claimed', 'Submitted', 'Approved', 'Rejected'];
 
@@ -55,8 +57,28 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
 
           <div className="flex flex-col gap-1.5">
             <label className={labelCls}>Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange}
-              rows={3} placeholder="Describe the task deliverables..." className={inputCls} />
+            <div
+              className={`
+              quill-wrapper bg-bg-input border border-border rounded-lg overflow-hidden
+              focus-within:border-primary focus-within:ring-[3px] focus-within:ring-primary/15 transition-all
+                [&_.ql-toolbar]:!border [&_.ql-toolbar]:!border-border
+                [&_.ql-container]:!border
+              [&_.ql-container]:!border-border
+              `}
+            >
+              <ReactQuill
+                // theme="snow"
+                value={form.description}
+                onChange={(value) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    description: value,
+                  }))
+                }
+                className='placeholder:text-[#4e4a6e]'
+                placeholder="Describe the task deliverables..."
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

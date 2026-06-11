@@ -1,5 +1,7 @@
 ﻿import { useState } from 'react';
 import { updateTask, fetchTalents } from '../../api/tasks';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 const STATUS_OPTIONS = ['Open', 'Claimed', 'Submitted', 'Approved', 'Rejected'];
 const inputCls = 'w-full bg-bg-input border border-border rounded-lg px-3.5 py-2.5 text-sm text-text-primary outline-none placeholder:text-[#4e4a6e] focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-all font-sans resize-y';
@@ -50,9 +52,34 @@ const EditTaskModal = ({ task, onClose, onUpdated }) => {
             <input name="title" value={form.title} onChange={handleChange} className={inputCls} />
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          {/* <div className="flex flex-col gap-1.5">
             <label className={labelCls}>Description</label>
             <textarea name="description" value={form.description} onChange={handleChange} rows={3} className={inputCls} />
+          </div> */}
+
+          <div className="flex flex-col gap-1.5">
+            <label className={labelCls}>Description</label>
+            <div
+              className={`
+              quill-wrapper bg-bg-input border border-border rounded-lg overflow-hidden
+              focus-within:border-primary focus-within:ring-[3px] focus-within:ring-primary/15 transition-all
+                [&_.ql-toolbar]:!border [&_.ql-toolbar]:!border-border
+                [&_.ql-container]:!border
+              [&_.ql-container]:!border-border
+              `}
+            >
+              <ReactQuill
+                value={form.description}
+                onChange={(value) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    description: value,
+                  }))
+                }
+                className='placeholder:text-[#4e4a6e]'
+                placeholder="Describe the task deliverables..."
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

@@ -65,6 +65,14 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
     );
   }
 
+  function ConvertHtmltoText (givenHtml) {
+      const tempDiv =  document.createElement("div");
+      tempDiv.innerHTML = givenHtml;
+  
+      const text = tempDiv.textContent || tempDiv.innerText || "";
+      return text;
+  }
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-collapse" style={{ fontSize: '13.5px' }}>
@@ -91,8 +99,12 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
                   {task.title || '—'}
                 </span>
                 {task.description && (
-                  <span className="block truncate" style={{ color: '#4B5563', fontSize: '12px', maxWidth: '240px' }}>
-                    {task.description}
+                  <span className="block truncate wrap-break-word" style={{
+                    color: "#4B5563",
+                    fontSize: "12px",
+                    maxWidth: "240px",
+                  }}>
+                      {ConvertHtmltoText(task.description)}
                   </span>
                 )}
               </td>

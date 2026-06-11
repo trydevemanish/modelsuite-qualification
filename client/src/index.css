@@ -477,3 +477,27 @@ input, select, textarea {
   color: #EF4444;
   background: rgba(239,68,68,0.1);
 }
+
+
+
+
+
+/* React qull css styling  */
+.quill-wrapper .ql-editor.ql-blank::before {
+  color: #4e4a6e !important;
+  font-style:normal;
+  font-size: medium;
+}
+
+.quill-wrapper .ql-editor {
+  min-height: 80px;
+  max-height: 100px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  outline: none;
+}
+
+.quill-wrapper .ql-editor::-webkit-scrollbar {
+  display: none;
+}
