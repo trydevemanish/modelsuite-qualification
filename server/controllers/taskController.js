@@ -42,8 +42,12 @@ const createTask = async (req, res) => {
 
   try {
 
-    if(!title || !description){
-      return res.status(404).json({ message : "Empty payload received" });
+    const plainText = description.replace(/<[^>]*>/g, '').trim();
+
+    if (!title?.trim() || !plainText) {
+      return res.status(400).json({
+        message: "Empty payload received"
+      });
     }
 
     const task = await Task.create({
